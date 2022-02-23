@@ -21,3 +21,27 @@ class ClassroomViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Classroom.objects.all()
+
+class StudentViewSet(viewsets.ModelViewSet):
+    serializer_class = StudentSerializer
+
+    def get_queryset(self):
+        return Student.objects.all()
+
+class AssignmentViewSet(viewsets.ModelViewSet):
+    serializer_class = AssignmentSerializer
+
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return Assignment.objects.all()
+
+class AssignmentStatusViewSet(viewsets.ModelViewSet):
+    serializer_class = AssignmentStatusSerializer
+
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return AssignmentStatus.objects.all()
