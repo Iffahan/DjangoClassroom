@@ -23,15 +23,15 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
+    is_staff = serializers.CharField(write_only=True, required=True)
 
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name', 'is_teacher', 'is_student')
+        fields = ('username', 'password', 'password2', 'is_staff','email', 'first_name', 'last_name',)
         extra_kwargs = {
             'first_name': {'required': True},
             'last_name': {'required': True},
-            'is_teacher': {'required': True},
         }
 
     def validate(self, attrs):
@@ -46,9 +46,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
-            is_teacher=validated_data['is_teacher'],
-            is_student=validated_data['is_student'],
-
+            is_staff=validated_data['is_staff'],
         )
 
         
