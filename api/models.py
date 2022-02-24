@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 class Classroom(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     title = models.CharField(max_length=255)
-    user_code = models.CharField(max_length=200, null = True)
 
     def __str__(self):
         return self.title
@@ -17,7 +16,6 @@ class Assignment(models.Model):
     deadline = models.DateTimeField(default=datetime.now, blank=True)
     description = models.TextField()
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, null = True)
-    user_code = models.CharField(max_length=200, null = True) 
 
     def __str__(self):
         return self.title

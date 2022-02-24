@@ -63,7 +63,7 @@ class AssignmentStatusViewSet(viewsets.ModelViewSet):
 
 @api_view(['POST'])
 def user_result_do(request,pk):
-    snippets = AssignmentStatus.objects.filter(user_code='1',id=pk)
+    snippets = AssignmentStatus.objects.filter(user_code='2',id=pk)
     if(len(snippets) > 0):
         snippet = snippets[0]
         snippet.status = True

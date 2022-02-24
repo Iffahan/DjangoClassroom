@@ -12,5 +12,5 @@ router.register(r'assignment_status', AssignmentStatusViewSet, basename='assignm
 
 urlpatterns = [
     path(r'', include(router.urls)),
-    path('userdo/<int:pk>', views.user_result_do),
+    path('user_result_do/<int:pk>', views.user_result_do),
 ]
