@@ -6,40 +6,18 @@ from django.contrib.auth.models import User
 class Classroom(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     title = models.CharField(max_length=255)
+    user_code = models.CharField(max_length=200, null = True)
 
     def __str__(self):
         return self.title
 
-class Student(models.Model):
-    students = models.ManyToManyField(User, null=True)
-    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, null = True)
-    
-    def __str__(self):
-        return self.classroom.title
-
 class Assignment(models.Model):
-    teacher = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     title = models.CharField(max_length=255)
+    posted_date = models.DateTimeField(default=datetime.now, blank=True)
     deadline = models.DateTimeField(default=datetime.now, blank=True)
+    description = models.TextField()
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, null = True)
-    
-    UNGRADED = 0
-    POOR = 1
-    BELOW_AVERAGE = 2
-    AVERAGE = 3
-    GOOD = 4
-    EXCELLENT = 5
-
-    SCORE_CHOICES = (
-        (UNGRADED, 'Ungraded'),
-        (str(POOR), ('1 - Very Poor')),
-        (str(BELOW_AVERAGE), ('2 - Below Average')),
-        (str(AVERAGE), ('3 - Average')),
-        (str(GOOD), ('4 - Good')),
-        (str(EXCELLENT), ('5 - Excellent'))
-    )
-
-    score = models.BooleanField(choices=SCORE_CHOICES, default=False)
+    user_code = models.CharField(max_length=200, null = True) 
 
     def __str__(self):
         return self.title
@@ -47,6 +25,7 @@ class Assignment(models.Model):
 class AssignmentStatus(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, null = True)
     student = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
+    user_code = models.CharField(max_length=200, null = True)
     
     BOOL_CHOICES = ((True, 'Completed'), (False, 'Incomplete'))
 
@@ -54,3 +33,5 @@ class AssignmentStatus(models.Model):
 
     def __str__(self):
         return self.student.username
+
+

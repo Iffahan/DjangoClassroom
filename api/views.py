@@ -10,7 +10,21 @@ from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import *
-from django.http import Http404  
+from django.http import Http404, HttpResponseNotFound  
+from django.db.models import fields
+from django.http.response import HttpResponseNotFound
+from django.shortcuts import render
+from django.http import HttpResponse
+from django_filters.filters import DateTimeFilter
+from rest_framework import generics, viewsets, serializers
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.fields import datetime
+from rest_framework.response import Response
+from rest_framework import permissions
+from django.http import JsonResponse
+
+from api.models import Assignment, AssignmentStatus
+
 
 
 class ClassroomViewSet(viewsets.ModelViewSet):
@@ -22,11 +36,11 @@ class ClassroomViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Classroom.objects.all()
 
-class StudentViewSet(viewsets.ModelViewSet):
-    serializer_class = StudentSerializer
+# class StudentViewSet(viewsets.ModelViewSet):
+#     serializer_class = StudentSerializer
 
-    def get_queryset(self):
-        return Student.objects.all()
+#     def get_queryset(self):
+#         return Student.objects.all()
 
 class AssignmentViewSet(viewsets.ModelViewSet):
     serializer_class = AssignmentSerializer
@@ -45,3 +59,15 @@ class AssignmentStatusViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return AssignmentStatus.objects.all()
+
+
+@api_view(['POST'])
+def user_result_do(request,pk):
+    snippets = AssignmentStatus.objects.filter(user_code='1',id=pk)
+    if(len(snippets) > 0):
+        snippet = snippets[0]
+        snippet.status = True
+        snippet.save()
+        return Response({"data": {"status": snippet.status}})
+    else:
+        return HttpResponseNotFound()
