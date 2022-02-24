@@ -25,9 +25,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'regist.apps.RegistConfig',
+    'rolls.apps.RollsConfig',
 
     'api',
-    'regist',
+    
 
     'rest_framework',
     'corsheaders',
@@ -132,4 +134,4 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
-
+AUTH_PROFILE_MODULE = "rolls.UserProfile"
