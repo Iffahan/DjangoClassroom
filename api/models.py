@@ -2,6 +2,7 @@ from django.db import models
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+from pytz import timezone
 
 class Classroom(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
@@ -31,5 +32,22 @@ class AssignmentStatus(models.Model):
 
     def __str__(self):
         return self.student.username
+
+class Group(models.Model):
+   MEMBERS_NUMBER = [
+      (2, 'Two people'),
+      (5, '3 to 5'),
+      (10, '5 to 10'),
+   ]
+   group_name = models.CharField(max_length=50)
+   slug = models.SlugField(max_length=50, unique=True)
+   members = models.IntegerField(choices=MEMBERS_NUMBER)
+   people = models.ManyToManyField('Profile', through='Membership', blank = True)
+   summary = models.TextField(
+      'Summary and indeas',
+      max_length=500,
+      help_text='Say what you want to do with your study or jub partner.'
+   )
+   date_created = models.DateTimeField(default=timezone.now)
 
 
