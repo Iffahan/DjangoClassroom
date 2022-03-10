@@ -1,12 +1,16 @@
 from django.db import models
 from django.db import models
 from datetime import datetime
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from pytz import timezone
 
 class Classroom(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     title = models.CharField(max_length=255)
+    g = Group.objects.get(name=title)
+    users = User.objects.all()
+    for u in users:
+        g.user_set.add(u)
 
     def __str__(self):
         return self.title
