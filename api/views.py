@@ -24,6 +24,7 @@ from rest_framework import permissions
 from django.http import JsonResponse
 
 from api.models import Assignment, AssignmentStatus
+from .serializers import UserSerializer
 
 
 
@@ -71,3 +72,8 @@ def user_result_do(request,pk):
         return Response({"data": {"status": snippet.status}})
     else:
         return HttpResponseNotFound()
+
+@api_view(['GET'])
+def UserDetail(request):
+    s = UserSerializer(request.user)
+    return Response(s.data)

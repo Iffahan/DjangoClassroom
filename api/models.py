@@ -1,16 +1,16 @@
+from enum import unique
+import re
 from django.db import models
 from django.db import models
 from datetime import datetime
-from django.contrib.auth.models import User, Group
-from pytz import timezone
+from django.contrib.auth.models import User,Group
+from django.utils.crypto import get_random_string
 
 class Classroom(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     title = models.CharField(max_length=255)
-    g = Group.objects.get(name=title)
-    users = User.objects.all()
-    for u in users:
-        g.user_set.add(u)
+    unique_code = models.CharField(max_length=7)
+
 
     def __str__(self):
         return self.title
