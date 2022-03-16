@@ -24,7 +24,7 @@ from rest_framework import permissions
 from django.http import JsonResponse
 
 from api.models import Assignment, AssignmentStatus
-from .serializers import UserSerializer
+from .serializers import *
 
 
 
@@ -81,12 +81,12 @@ def UserDetail(request):
 @api_view(['POST'])
 def addUser(request,pk):
     data = request.data
-    NewMember = data['a']
+    NewMember = data['new']
     ClassMembers= Classroom.objects.filter(id=pk)
     if(len(ClassMembers) > 0):
         ClassMember = ClassMembers[0]
         ClassMember.Member.add(NewMember)
         ClassMember.save()
 
-    return Response({'Change':ClassMember})
+    return Response({"New": ClassMember.Member})
 
