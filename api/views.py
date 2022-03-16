@@ -80,11 +80,13 @@ def UserDetail(request):
 
 @api_view(['POST'])
 def addUser(request,pk):
-    snippets = Classroom.objects.filter(id=pk)
-    if(len(snippets) > 0):
-        snippet = snippets[0]
-        snippet.Member = f
-        snippet.save()
+    data = request.data
+    NewMember = data['a']
+    ClassMembers= Classroom.objects.filter(id=pk)
+    if(len(ClassMembers) > 0):
+        ClassMember = ClassMembers[0]
+        ClassMember.Member.add(NewMember)
+        ClassMember.save()
 
-    return Response({'Change Member': snippet.Member})
+    return Response({'Change':ClassMember})
 
