@@ -94,10 +94,20 @@ def UserDetail(request):
 @api_view(['POST'])
 def addUser(request,pk):
     data = request.data
-    NewMember = data['new']
+    NewMember = data['user']
     newuser = User.objects.get(username=NewMember)
     classroom = Classroom.objects.get(id=pk)
     classroom.Member.add(newuser)
+
+    return Response({"success"})
+
+@api_view(['POST'])
+def removeUser(request,pk):
+    data = request.data
+    inUser = data['user']
+    inuser = User.objects.get(username=inUser)
+    classroom = Classroom.objects.get(id=pk)
+    classroom.Member.remove(inuser)
 
     return Response({"success"})
 
