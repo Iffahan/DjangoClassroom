@@ -64,7 +64,7 @@ class AssignmentStatusViewSet(viewsets.ModelViewSet):
 
 @api_view(['POST'])
 def user_result_do(request,pk):
-    snippets = AssignmentStatus.objects.filter(user_code='2',id=pk)
+    snippets = AssignmentStatus.objects.filter(id=pk)
     if(len(snippets) > 0):
         snippet = snippets[0]
         snippet.status = True
@@ -77,3 +77,14 @@ def user_result_do(request,pk):
 def UserDetail(request):
     s = UserSerializer(request.user)
     return Response(s.data)
+
+@api_view(['POST'])
+def addUser(request,pk):
+    snippets = Classroom.objects.filter(id=pk)
+    if(len(snippets) > 0):
+        snippet = snippets[0]
+        snippet.Member = f
+        snippet.save()
+
+    return Response({'Change Member': snippet.Member})
+

@@ -6,14 +6,14 @@ from datetime import datetime
 from django.contrib.auth.models import User,Group
 from django.utils.crypto import get_random_string
 
+
+
 class Classroom(models.Model):
-    teacher = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
-    title = models.CharField(max_length=255)
-    unique_code = models.CharField(max_length=7)
-
-
+    classroomName = models.CharField(max_length=30, default='Classroom Name', null = False)
+    teacher = models.ForeignKey(User,on_delete=models.CASCADE,related_name='teacher')
+    Member = models.ManyToManyField(User,related_name='member',null = False)
     def __str__(self):
-        return self.title
+        return self.classroomName
 
 class Assignment(models.Model):
     title = models.CharField(max_length=255)
@@ -36,5 +36,7 @@ class AssignmentStatus(models.Model):
 
     def __str__(self):
         return self.student.username
+
+
 
 

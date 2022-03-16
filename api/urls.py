@@ -14,5 +14,6 @@ urlpatterns = [
     path(r'', include(router.urls)),
     path('user_result_do/<int:pk>', views.user_result_do),
     path('userdetail', views.UserDetail),
+    path('addUser', views.addUser),
 
 ]
