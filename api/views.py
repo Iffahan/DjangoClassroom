@@ -78,19 +78,6 @@ def UserDetail(request):
     s = UserSerializer(request.user)
     return Response(s.data)
 
-# @api_view(['POST'])
-# def addUser(request,pk):
-#     data = request.data
-#     NewMember = data['new']
-#     NewUser = User.objects.get(username=NewMember)
-#     NewUser.save()
-#     a1 = Classroom.objects.filter(id=pk)
-#     a1 = Classroom()
-#     a1.Member.add(NewUser)
-
-
-#     return Response({"New": ClassMember.Member})
-
 @api_view(['POST'])
 def addUser(request,pk):
     data = request.data

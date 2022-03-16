@@ -20,16 +20,6 @@ class ClassroomSerializer(serializers.ModelSerializer):
         model = Classroom
         fields = '__all__'
 
-
-
-# class StudentSerializer(serializers.ModelSerializer):
-#     classroom = serializers.CharField(source = 'classroom.title', required = False, read_only = True)
-#     classroom_id = serializers.IntegerField(source = 'classroom.id', required = False, read_only = True)
-#     student_id = serializers.IntegerField(source = 'id', required = False, read_only = True)
-#     class Meta:
-#         model = Student
-#         fields = ('student_id','classroom','classroom_id','students',)
-
 class AssignmentSerializer(serializers.ModelSerializer):
     teacher = serializers.CharField(source = 'teacher.username', required = False, read_only = True)
     assignment_id = serializers.IntegerField(source = 'assignment.id', required = False, read_only = True)
