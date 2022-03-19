@@ -18,5 +18,6 @@ urlpatterns = [
     path('removeUser/<int:pk>', views.removeUser),
     path('createClass', views.createClass),
     path('join', views.join),
+    path('myclass', views.myclass),
 
 ]

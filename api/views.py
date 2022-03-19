@@ -119,3 +119,9 @@ def join(request):
 
     return Response("success! you join the class")
 
+@api_view(['GET'])
+def myclass(request):
+    current_user = User.objects.get(username=request.user)
+    classroom = Classroom.objects.filter(Member = current_user)
+
+    return Response(classroom)
