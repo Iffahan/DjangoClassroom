@@ -1,3 +1,4 @@
+from pydoc import classname
 from django.shortcuts import render
 from django.db.models import query
 from django.shortcuts import get_object_or_404
@@ -37,11 +38,6 @@ class ClassroomViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Classroom.objects.all()
 
-# class StudentViewSet(viewsets.ModelViewSet):
-#     serializer_class = StudentSerializer
-
-#     def get_queryset(self):
-#         return Student.objects.all()
 
 class AssignmentViewSet(viewsets.ModelViewSet):
     serializer_class = AssignmentSerializer
@@ -73,6 +69,8 @@ def user_result_do(request,pk):
     else:
         return HttpResponseNotFound()
 
+
+
 @api_view(['GET'])
 def UserDetail(request):
     s = UserSerializer(request.user)
@@ -97,4 +95,15 @@ def removeUser(request,pk):
     classroom.Member.remove(inuser)
 
     return Response({"success"})
+
+@api_view(['POST'])
+def createClass(request):
+    data = request.data
+    ClassName = data['className']
+    Teacher = data['teacher']
+    teacher_user = User.objects.get(username=Teacher)
+    classroom = Classroom.objects.create(classroomName=ClassName, teacher = teacher_user)
+    classroom.save()
+
+    return Response({"create classroom success!"})
 

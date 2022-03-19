@@ -9,9 +9,9 @@ from django.utils.crypto import get_random_string
 
 
 class Classroom(models.Model):
-    classroomName = models.CharField(max_length=30, default='Classroom Name', null = False)
+    classroomName = models.CharField(max_length=30, default='Classroom Name')
     teacher = models.ForeignKey(User,on_delete=models.CASCADE,related_name='teacher')
-    Member = models.ManyToManyField(User,related_name='member',null = False)
+    Member = models.ManyToManyField(User,related_name='member')
     def __str__(self):
         return self.classroomName
 
@@ -28,7 +28,6 @@ class Assignment(models.Model):
 class AssignmentStatus(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, null = True)
     student = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
-    user_code = models.CharField(max_length=200, null = True)
     
     BOOL_CHOICES = ((True, 'Completed'), (False, 'Incomplete'))
 
