@@ -125,3 +125,15 @@ def myclass(request):
     classroom = Classroom.objects.filter(Member = current_user)
 
     return Response(classroom)
+
+@api_view(['POST'])
+def changeProfile(request):
+    data = request.data
+    FIRSTNAME = data['first_name']
+    LASTNAME = data['last_name']
+    current_user = User.objects.get(username=request.user)
+    current_user.first_name = FIRSTNAME
+    current_user.last_name = LASTNAME
+    current_user.save()
+
+    return Response({"change to" :[current_user.first_name,current_user.last_name]})

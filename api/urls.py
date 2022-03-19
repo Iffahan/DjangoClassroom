@@ -19,5 +19,6 @@ urlpatterns = [
     path('createClass', views.createClass),
     path('join', views.join),
     path('myclass', views.myclass),
+    path('changeProfile', views.changeProfile),
 
 ]
