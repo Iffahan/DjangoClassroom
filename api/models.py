@@ -1,4 +1,5 @@
 from enum import unique
+from operator import truediv
 import re
 from django.db import models
 from django.db import models
@@ -10,6 +11,7 @@ from django.utils.crypto import get_random_string
 
 class Classroom(models.Model):
     classroomName = models.CharField(max_length=30, default='Classroom Name')
+    classCode = models.CharField(max_length=6)
     teacher = models.ForeignKey(User,on_delete=models.CASCADE,related_name='teacher')
     Member = models.ManyToManyField(User,related_name='member')
     def __str__(self):

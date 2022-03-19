@@ -101,8 +101,9 @@ def createClass(request):
     data = request.data
     ClassName = data['className']
     Teacher = data['teacher']
+    ClassCode = data['ClassCode']
     teacher_user = User.objects.get(username=Teacher)
-    classroom = Classroom.objects.create(classroomName=ClassName, teacher = teacher_user)
+    classroom = Classroom.objects.create(classroomName=ClassName, teacher = teacher_user, classCode = ClassCode)
     classroom.save()
 
     return Response({"create classroom success!"})
