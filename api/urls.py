@@ -17,5 +17,6 @@ urlpatterns = [
     path('addUser/<int:pk>', views.addUser),
     path('removeUser/<int:pk>', views.removeUser),
     path('createClass', views.createClass),
+    path('join', views.join),
 
 ]

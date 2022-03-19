@@ -1,3 +1,4 @@
+from hashlib import new
 from pydoc import classname
 from django.shortcuts import render
 from django.db.models import query
@@ -108,5 +109,13 @@ def createClass(request):
 
     return Response({"create classroom success!"})
 
+@api_view(['POST'])
+def join(request):
+    data = request.data
+    ClassCode = data['classCode']
+    newuser = User.objects.get(username=request.user)
+    classroom = Classroom.objects.get(classCode = ClassCode)
+    classroom.Member.add(newuser)
 
+    return Response("success! you join the class")
 
