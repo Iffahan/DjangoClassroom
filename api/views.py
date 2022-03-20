@@ -60,11 +60,16 @@ class AssignmentStatusViewSet(viewsets.ModelViewSet):
 
 
 @api_view(['POST'])
-def user_result_do(request):
+def user_result_do(request,pk):
     data = request.data
     Result = data['result']
-    student = User.objects.get(username=request.user)
-    assignment = Assignment.objects.create(classroom=classroomA, title = Title, description = Description, deadline=Deadline)
+    Student = User.objects.get(username=request.user)
+    Assignments = Assignment.objects.get(id=pk)
+    assignmentStatus = AssignmentStatus.objects.create(assignment=Assignments, student = Student)
+    assignmentStatus.status = Result
+    assignmentStatus.save()
+
+    return Response({"success!"})
 
 
 @api_view(['GET'])
@@ -149,8 +154,10 @@ def createAssignment(request,pk):
     Title = data['title']
     Description = data['description']
     Deadline = data['deadline']
+    Choice_True = data['choice_true']
+    Choice_False = data['choice_false']
     classroomA = Classroom.objects.get(id=pk)
-    assignment = Assignment.objects.create(classroom=classroomA, title = Title, description = Description, deadline=Deadline)
+    assignment = Assignment.objects.create(classroom=classroomA, title = Title, description = Description, deadline=Deadline,choice_true=Choice_True,choice_false=Choice_False)
     assignment.save()
 
     return Response({"create assignment success!"})
