@@ -20,5 +20,6 @@ urlpatterns = [
     path('join', views.join),
     path('myclass', views.myclass),
     path('changeProfile', views.changeProfile),
+    path('changeEmail', views.changeEmail),
 
 ]

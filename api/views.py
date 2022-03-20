@@ -78,8 +78,8 @@ def UserDetail(request):
 @api_view(['POST'])
 def addUser(request,pk):
     data = request.data
-    NewMember = data['user']
-    newuser = User.objects.get(username=NewMember)
+    Email = data['email']
+    newuser = User.objects.get(email=Email)
     classroom = Classroom.objects.get(id=pk)
     classroom.Member.add(newuser)
 
@@ -88,10 +88,10 @@ def addUser(request,pk):
 @api_view(['POST'])
 def removeUser(request,pk):
     data = request.data
-    inUser = data['user']
-    inuser = User.objects.get(username=inUser)
+    Email = data['email']
+    newuser = User.objects.get(email=Email)
     classroom = Classroom.objects.get(id=pk)
-    classroom.Member.remove(inuser)
+    classroom.Member.remove(newuser)
 
     return Response({"success"})
 
@@ -129,11 +129,19 @@ def changeProfile(request):
     data = request.data
     FIRSTNAME = data['first_name']
     LASTNAME = data['last_name']
-    Email = data['email']
     current_user = User.objects.get(username=request.user)
     current_user.first_name = FIRSTNAME
     current_user.last_name = LASTNAME
+    current_user.save()
+
+    return Response({"change to" :[current_user.first_name,current_user.last_name]})
+
+@api_view(['POST'])
+def changeEmail(request):
+    data = request.data
+    Email = data['email']
+    current_user = User.objects.get(username=request.user)
     current_user.email = Email
     current_user.save()
 
-    return Response({"change to" :[current_user.first_name,current_user.last_name,current_user.email]})
+    return Response({"change to" :[current_user.email]})
