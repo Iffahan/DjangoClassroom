@@ -21,5 +21,6 @@ urlpatterns = [
     path('myclass', views.myclass),
     path('changeProfile', views.changeProfile),
     path('changeEmail', views.changeEmail),
+    path('createAssignment/<int:pk>', views.createAssignment),
 
 ]

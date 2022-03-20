@@ -60,15 +60,12 @@ class AssignmentStatusViewSet(viewsets.ModelViewSet):
 
 
 @api_view(['POST'])
-def user_result_do(request,pk):
-    snippets = AssignmentStatus.objects.filter(id=pk)
-    if(len(snippets) > 0):
-        snippet = snippets[0]
-        snippet.status = True
-        snippet.save()
-        return Response({"data": {"status": snippet.status}})
-    else:
-        return HttpResponseNotFound()
+def user_result_do(request):
+    data = request.data
+    Result = data['result']
+    student = User.objects.get(username=request.user)
+    assignment = Assignment.objects.create(classroom=classroomA, title = Title, description = Description, deadline=Deadline)
+
 
 @api_view(['GET'])
 def UserDetail(request):
@@ -145,3 +142,15 @@ def changeEmail(request):
     current_user.save()
 
     return Response({"change to" :[current_user.email]})
+
+@api_view(['POST'])
+def createAssignment(request,pk):
+    data = request.data
+    Title = data['title']
+    Description = data['description']
+    Deadline = data['deadline']
+    classroomA = Classroom.objects.get(id=pk)
+    assignment = Assignment.objects.create(classroom=classroomA, title = Title, description = Description, deadline=Deadline)
+    assignment.save()
+
+    return Response({"create assignment success!"})
