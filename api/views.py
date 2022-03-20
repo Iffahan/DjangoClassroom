@@ -70,8 +70,6 @@ def user_result_do(request,pk):
     else:
         return HttpResponseNotFound()
 
-
-
 @api_view(['GET'])
 def UserDetail(request):
     s = UserSerializer(request.user)
@@ -131,9 +129,11 @@ def changeProfile(request):
     data = request.data
     FIRSTNAME = data['first_name']
     LASTNAME = data['last_name']
+    Email = data['email']
     current_user = User.objects.get(username=request.user)
     current_user.first_name = FIRSTNAME
     current_user.last_name = LASTNAME
+    current_user.email = Email
     current_user.save()
 
-    return Response({"change to" :[current_user.first_name,current_user.last_name]})
+    return Response({"change to" :[current_user.first_name,current_user.last_name,current_user.email]})
