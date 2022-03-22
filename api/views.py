@@ -161,3 +161,9 @@ def createAssignment(request,pk):
     assignment.save()
 
     return Response({"create assignment success!"})
+
+@api_view(['GET'])
+def getUserClassroom(request):
+    current_user = User.objects.get(username=request.user)
+    
+    return Response({"classroom" :[item.classroomName for item in Classroom.objects.filter(Member=current_user)]})
