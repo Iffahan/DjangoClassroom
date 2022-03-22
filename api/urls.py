@@ -23,5 +23,6 @@ urlpatterns = [
     path('changeEmail', views.changeEmail),
     path('createAssignment/<int:pk>', views.createAssignment),
     path('getUserClassroom', views.getUserClassroom),
+    path('getClassAssignment/<int:pk>', views.getClassAssignment),
 
 ]

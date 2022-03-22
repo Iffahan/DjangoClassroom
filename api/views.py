@@ -172,3 +172,15 @@ def getUserClassroom(request):
 
 
     return Response(myclass)
+
+@api_view(['GET'])
+def getClassAssignment(request,pk):
+    myassignment = {}
+
+    current_user = User.objects.get(username=request.user)
+    for item in Assignment.objects.filter(id=pk):
+        myassignment[item.id] = item.title
+
+        
+
+    return Response(myassignment)
