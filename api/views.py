@@ -229,6 +229,14 @@ def changeMessage(request,pk):
 
     return Response({"change to":message.text})
 
+@api_view(['POST'])
+def deleteMessage(request,pk):
+
+    message = Message.objects.get(id=pk)
+    message.delete()
+
+    return Response({"delete":message.text})
+
 
 @api_view(['GET'])
 def getMessage(request,pk):
