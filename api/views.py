@@ -177,8 +177,10 @@ def createAssignment(request,pk):
 @api_view(['GET'])
 def getUserClassroom(request):
     nested_dict = {}
+    n=0
     for item in Classroom.objects.filter(Member = request.user):
-        nested_dict[item.id] = {"id" : item.id ,"name": item.classroomName}
+        nested_dict[n] = {"id" : item.id ,"name": item.classroomName}
+        n = n + 1
 
     return JsonResponse(nested_dict)
 
