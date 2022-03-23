@@ -215,7 +215,7 @@ def getMessage(request,pk):
     n=0
     
     for item in Message.objects.filter(classroom=classroom1):
-        dic1[n] = {'id': item.id, 'class': item.classroom, 'text' : item.text }
+        dic1[n] = {'id': item.id, 'user':item.user.username, 'firstname':item.user.first_name, 'lastname':item.user.last_name, 'class': item.classroom.classroomName, 'text' : item.text }
         n= n+1
 
     return Response(dic1)
