@@ -12,7 +12,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ClassroomSerializer(serializers.ModelSerializer):
-    teacher = serializers.CharField(source = 'teacher.username', required = False, read_only = True)
+    teacher_firstname = serializers.CharField(source = 'teacher.first_name' , required = False, read_only = True)
+    teacher_lastname = serializers.CharField(source = 'teacher.last_name', required = False, read_only = True)
     teacher_id = serializers.IntegerField(source = 'teacher.id', required = False, read_only = True)
     Member = serializers.SlugRelatedField(queryset=User.objects.all(), many=True, slug_field="username") 
     

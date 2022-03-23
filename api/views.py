@@ -117,6 +117,7 @@ def leave(request,pk):
 
     return Response({"success"})
 
+
 @api_view(['POST'])
 def createClass(request):
     data = request.data
@@ -215,6 +216,19 @@ def postMessage(request,pk):
     message.save()
 
     return Response({"post":message.text})
+
+@api_view(['POST'])
+def changeMessage(request,pk):
+    data = request.data
+    text_input = data['text']
+    current_user = User.objects.get(username=request.user)
+
+    message = Message.objects.get(id=pk)
+    message.text = text_input
+    message.save()
+
+    return Response({"change to":message.text})
+
 
 @api_view(['GET'])
 def getMessage(request,pk):
