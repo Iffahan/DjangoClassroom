@@ -176,11 +176,11 @@ def createAssignment(request,pk):
 
 @api_view(['GET'])
 def getUserClassroom(request):
-    dict1 = {}
+    nested_dict = {}
     for item in Classroom.objects.filter(Member = request.user):
-        dict1[item.id] = item.id, item.classroomName
+        nested_dict[item.id] = {"id" : item.id ,"name": item.classroomName}
 
-    return JsonResponse(dict1)
+    return JsonResponse(nested_dict)
 
 @api_view(['GET'])
 def getClassAssignment(request,pk):
