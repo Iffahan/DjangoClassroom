@@ -2,6 +2,9 @@ from rest_framework import serializers, viewsets
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.db.models import Value as V
+from django.db.models.functions import Concat   
+
 
 User = get_user_model()
 
@@ -15,7 +18,7 @@ class ClassroomSerializer(serializers.ModelSerializer):
     teacher_firstname = serializers.CharField(source = 'teacher.first_name' , required = False, read_only = True)
     teacher_lastname = serializers.CharField(source = 'teacher.last_name', required = False, read_only = True)
     teacher_id = serializers.IntegerField(source = 'teacher.id', required = False, read_only = True)
-    Member = serializers.SlugRelatedField(queryset=User.objects.all(), many=True, slug_field="username") 
+    Member = serializers.SlugRelatedField(queryset=User.objects.all(), many=True, slug_field='first_name') 
     
     class Meta:
         model = Classroom
