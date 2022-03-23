@@ -24,7 +24,8 @@ from rest_framework.fields import datetime
 from rest_framework.response import Response
 from rest_framework import permissions
 from django.http import JsonResponse
-
+from django.core import serializers
+from django.http import HttpResponse
 from api.models import Assignment, AssignmentStatus
 from .serializers import *
 
@@ -76,6 +77,7 @@ def user_result_do(request,pk):
 def UserDetail(request):
     s = UserSerializer(request.user)
     return Response(s.data)
+
 
 @api_view(['POST'])
 def addUser(request,pk):
@@ -164,14 +166,11 @@ def createAssignment(request,pk):
 
 @api_view(['GET'])
 def getUserClassroom(request):
-    myclass = {}
+    dict1 = {}
+    for item in Classroom.objects.filter(Member = request.user):
+        dict1[item.id] = item.id, item.classroomName
 
-    current_user = User.objects.get(username=request.user)
-    for item in Classroom.objects.filter(Member=current_user):
-        myclass[item.id] = item.classroomName
-
-
-    return Response(myclass)
+    return JsonResponse(dict1)
 
 @api_view(['GET'])
 def getClassAssignment(request,pk):
@@ -179,8 +178,6 @@ def getClassAssignment(request,pk):
 
     current_user = User.objects.get(username=request.user)
     for item in Assignment.objects.filter(id=pk):
-        myassignment[item.id] = item.title
-
-        
+        myassignment[item.id] = item.id, item.title
 
     return Response(myassignment)
