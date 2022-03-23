@@ -43,7 +43,6 @@ class AssignmentStatus(models.Model):
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, null = True)
-    date_created=models.DateTimeField(auto_now_add=True)
     text = models.CharField(max_length=500)
 
     def __str__(self):

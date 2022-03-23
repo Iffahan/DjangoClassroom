@@ -195,3 +195,27 @@ def getClassAssignment(request,pk):
         n= n+1
 
     return Response(myassignment)
+
+
+@api_view(['POST'])
+def postMessage(request,pk):
+    data = request.data
+    text_input = data['text']
+    current_user = User.objects.get(username=request.user)
+    classroom1 = Classroom.objects.get(id=pk)
+    message = Message.objects.create(classroom=classroom1, user=current_user, text = text_input)
+    message.save()
+
+    return Response({"post":message.text})
+
+@api_view(['GET'])
+def getMessage(request,pk):
+    classroom1 = Classroom.objects.get(id=pk)
+    dic1 = {}
+    n=0
+    
+    for item in Message.objects.filter(classroom=classroom1):
+        dic1[n] = {'id': item.id, 'class': item.classroom, 'text' : item.text }
+        n= n+1
+
+    return Response(dic1)

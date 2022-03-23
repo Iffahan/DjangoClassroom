@@ -24,5 +24,7 @@ urlpatterns = [
     path('createAssignment/<int:pk>', views.createAssignment),
     path('getUserClassroom', views.getUserClassroom),
     path('getClassAssignment/<int:pk>', views.getClassAssignment),
+    path('postMessage/<int:pk>', views.postMessage),
+    path('getMessage/<int:pk>', views.getMessage),
 
 ]

@@ -38,7 +38,11 @@ class AssignmentStatusSerializer(serializers.ModelSerializer):
         model = AssignmentStatus
         fields = '__all__'
 
-class MessageSerializer(serializers.ModelSerializer):    
+class MessageSerializer(serializers.ModelSerializer):  
+    classroom = serializers.CharField(source = 'classroom.title', required = False, read_only = True)
+    user = serializers.CharField(source = 'user.username', required = False, read_only = True)
+    user_firtname = serializers.CharField(source = 'user.firts_name', required = False, read_only = True)
+    user_last_name = serializers.CharField(source = 'user.lastname', required = False, read_only = True)
     class Meta:
         model = Message
         fields = '__all__'
