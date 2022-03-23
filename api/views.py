@@ -110,6 +110,14 @@ def removeUser(request,pk):
     return Response({"success"})
 
 @api_view(['POST'])
+def leave(request,pk):
+    current_user = User.objects.get(username = request.user)
+    classroom = Classroom.objects.get(id=pk)
+    classroom.Member.remove(current_user)
+
+    return Response({"success"})
+
+@api_view(['POST'])
 def createClass(request):
     data = request.data
     ClassName = data['className']

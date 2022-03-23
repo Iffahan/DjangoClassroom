@@ -26,5 +26,6 @@ urlpatterns = [
     path('getClassAssignment/<int:pk>', views.getClassAssignment),
     path('postMessage/<int:pk>', views.postMessage),
     path('getMessage/<int:pk>', views.getMessage),
+    path('leave/<int:pk>', views.leave),
 
 ]
