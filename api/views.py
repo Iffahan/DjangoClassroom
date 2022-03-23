@@ -59,6 +59,16 @@ class AssignmentStatusViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return AssignmentStatus.objects.all()
 
+class MessageViewSet(viewsets.ModelViewSet):
+    serializer_class = MessageSerializer
+
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return Message.objects.all()
+
+
 
 @api_view(['POST'])
 def user_result_do(request,pk):
