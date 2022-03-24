@@ -3,7 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
-
+from api.models import *
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
@@ -51,9 +51,10 @@ class RegisterSerializer(serializers.ModelSerializer):
             last_name=validated_data['last_name'],
             is_staff=validated_data['is_staff'],
         )
-
-        
         user.set_password(validated_data['password'])
         user.save()
+
+        score = Score.objects.create(student = user)
+        score.save()
 
         return user
