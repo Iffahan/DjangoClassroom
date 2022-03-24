@@ -6,7 +6,7 @@ from .settings import *
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django',
+        'NAME': 'dj',
         'USER': 'root',
         'PASSWORD': 'myP@ssw0rd',
         'HOST': 'dj_mysql',
