@@ -88,6 +88,9 @@ def user_result_do(request,pk):
     assignmentStatus = AssignmentStatus.objects.create(assignment=Assignments, student = Student)
     assignmentStatus.status = Result
     assignmentStatus.save()
+    studentScore = Score.objects.get(student = Student)
+    studentScore.score = studentScore.score + 1
+    studentScore.save()
 
     return Response({"success!"})
 
@@ -246,6 +249,14 @@ def deleteMessage(request,pk):
 
     return Response({"delete":message.text})
 
+@api_view(['POST'])
+def deleteClassroom(request,pk):
+
+    classroom = Classroom.objects.get(id=pk)
+    classroom.delete()
+
+    return Response({"delete":classroom.classroomName})
+
 
 @api_view(['GET'])
 def getMessage(request,pk):
@@ -258,3 +269,4 @@ def getMessage(request,pk):
         n= n+1
 
     return Response(dic1)
+

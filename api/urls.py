@@ -28,6 +28,7 @@ urlpatterns = [
     path('postMessage/<int:pk>', views.postMessage),
     path('changeMessage/<int:pk>', views.changeMessage),
     path('deleteMessage/<int:pk>', views.deleteMessage),
+    path('deleteClassroom/<int:pk>', views.deleteClassroom),
     path('getMessage/<int:pk>', views.getMessage),
     path('leave/<int:pk>', views.leave),
 
