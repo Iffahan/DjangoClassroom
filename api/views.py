@@ -40,6 +40,15 @@ class ClassroomViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Classroom.objects.all()
 
+class ScoreViewSet(viewsets.ModelViewSet):
+    serializer_class = ScoreSerializer
+    
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return Score.objects.all()
+
 
 class AssignmentViewSet(viewsets.ModelViewSet):
     serializer_class = AssignmentSerializer
