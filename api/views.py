@@ -143,6 +143,21 @@ def createClass(request):
     return Response({"create classroom success!"})
 
 @api_view(['POST'])
+def changeClass(request,pk):
+    data = request.data
+    ClassName = data['className']
+    Teacher = data['teacher']
+    ClassCode = data['classCode']
+    teacher_user = User.objects.get(username=Teacher)
+    classroom = Classroom.objects.get(id=pk)
+    classroom.classroomName=ClassName
+    classroom.teacher = teacher_user 
+    classroom.classCode = ClassCode
+    classroom.save()
+
+    return Response({"change classroom success!"})
+
+@api_view(['POST'])
 def join(request):
     data = request.data
     ClassCode = data['classCode']
@@ -194,6 +209,25 @@ def createAssignment(request,pk):
     assignment.save()
 
     return Response({"create assignment success!"})
+
+
+@api_view(['POST'])
+def changeAssignment(request,pk):
+    data = request.data
+    Title = data['title']
+    Description = data['description']
+    Deadline = data['deadline']
+    Choice_True = data['choice_true']
+    Choice_False = data['choice_false']
+    assignment = Assignment.objects.get(id=pk)
+    assignment.title = Title
+    assignment.description = Description
+    assignmentdeadline=Deadline
+    assignment.choice_true=Choice_True
+    assignment.choice_false=Choice_False
+    assignment.save()
+
+    return Response({"change assignment success!"})
 
 @api_view(['GET'])
 def getUserClassroom(request):
@@ -257,6 +291,14 @@ def deleteClassroom(request,pk):
 
     return Response({"delete":classroom.classroomName})
 
+@api_view(['POST'])
+def deleteAssignment(request,pk):
+
+    assignment = Assignment.objects.get(id=pk)
+    assignment.delete()
+
+    return Response({"delete":assignment.title})
+
 
 @api_view(['GET'])
 def getMessage(request,pk):
@@ -270,3 +312,10 @@ def getMessage(request,pk):
 
     return Response(dic1)
 
+@api_view(['GET'])
+def MyScore(request):
+    dic = {}
+    score = Score.objects.get(student=request.user)
+    dic["score"] = score.score
+
+    return Response(dic)

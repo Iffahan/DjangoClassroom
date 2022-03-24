@@ -31,5 +31,9 @@ urlpatterns = [
     path('deleteClassroom/<int:pk>', views.deleteClassroom),
     path('getMessage/<int:pk>', views.getMessage),
     path('leave/<int:pk>', views.leave),
+    path('MyScore', views.MyScore),
+    path('changeClass/<int:pk>', views.changeClass),
+    path('changeAssignment/<int:pk>', views.changeAssignment),
+    path('deleteAssignment/<int:pk>', views.deleteAssignment),
 
 ]
