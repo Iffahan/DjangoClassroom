@@ -40,6 +40,15 @@ class ClassroomViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Classroom.objects.all()
 
+class AssignmentResultViewSet(viewsets.ModelViewSet):
+    serializer_class = AssignmentResultSerializer
+    
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return AssignmentResult.objects.all()
+
 class ScoreViewSet(viewsets.ModelViewSet):
     serializer_class = ScoreSerializer
     
@@ -205,8 +214,9 @@ def createAssignment(request,pk):
     Choice_True = data['choice_true']
     Choice_False = data['choice_false']
     classroomA = Classroom.objects.get(id=pk)
-    assignment = Assignment.objects.create(classroom=classroomA, title = Title, description = Description, deadline=Deadline,choice_true=Choice_True,choice_false=Choice_False)
-    assignment.save()
+    assignments = Assignment.objects.create(classroom=classroomA, title = Title, description = Description, deadline=Deadline,choice_true=Choice_True,choice_false=Choice_False)
+    assignments.save()
+    assignmentResult = AssignmentResult.objects.create(assignment = assignments)
 
     return Response({"create assignment success!"})
 

@@ -36,6 +36,5 @@ urlpatterns = [
     path('changeAssignment/<int:pk>', views.changeAssignment),
     path('deleteAssignment/<int:pk>', views.deleteAssignment),
     path('ClassMembers/<int:pk>', views.ClassMembers),
-    #path('fullname', views.fullname),
 
 ]

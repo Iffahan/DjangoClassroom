@@ -7,4 +7,5 @@ admin.site.register(Assignment)
 admin.site.register(AssignmentStatus)
 admin.site.register(Message)
 admin.site.register(Score)
+admin.site.register(AssignmentResult)
 

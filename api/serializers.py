@@ -26,6 +26,13 @@ class ClassroomSerializer(serializers.ModelSerializer):
         model = Classroom
         fields = '__all__'
 
+class AssignmentResultSerializer(serializers.ModelSerializer):
+    Member = serializers.SlugRelatedField(queryset=User.objects.all(), many=True, slug_field='username')
+    
+    class Meta:
+        model = AssignmentResult
+        fields = '__all__'
+
 
 class ScoreSerializer(serializers.ModelSerializer):
     student_firstname = serializers.CharField(source = 'student.first_name' , required = False, read_only = True)
