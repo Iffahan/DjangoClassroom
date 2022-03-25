@@ -57,8 +57,8 @@ class Message(models.Model):
 
 class AssignmentResult(models.Model):
     assignment = models.ForeignKey(Assignment,on_delete=models.CASCADE,related_name='assignment')
-    TrueStudent = models.ManyToManyField(User,related_name='TrueStudent')
-    FalseStudent = models.ManyToManyField(User,related_name='FalseStudent')
+    TrueStudent = models.ManyToManyField(User,related_name='TrueStudent', null = True)
+    FalseStudent = models.ManyToManyField(User,related_name='FalseStudent', null = True)
     
     def __str__(self):
         return self.assignment.title

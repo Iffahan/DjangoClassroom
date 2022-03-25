@@ -97,9 +97,17 @@ def user_result_do(request,pk):
     assignmentStatus = AssignmentStatus.objects.create(assignment=Assignments, student = Student)
     assignmentStatus.status = Result
     assignmentStatus.save()
+    
     studentScore = Score.objects.get(student = Student)
     studentScore.score = studentScore.score + 1
     studentScore.save()
+
+    AsResult = AssignmentResult.objects.get(assignment = Assignments)
+    if Result == True:
+        AsResult.TrueStudent.add(Student)
+    else:
+        AsResult.FalseStudent.add(Student)
+    AsResult.save()
 
     return Response({"success!"})
 
@@ -332,6 +340,19 @@ def MyScore(request):
 
 @api_view(['GET'])
 def ClassMembers(request,pk):
+    dic1 = {}
+    n=0
+    classroom1 = Classroom.objects.get(id=pk)
+    Members = classroom1.Member.all()
+    for item in Members:
+        dic1[n] = {'id': item.id, 'user':item.username, 'firstname':item.first_name, 'lastname':item.last_name}
+        n= n+1
+
+
+    return Response(dic1)
+
+@api_view(['GET'])
+def AssignResult(request,pk):
     dic1 = {}
     n=0
     classroom1 = Classroom.objects.get(id=pk)
