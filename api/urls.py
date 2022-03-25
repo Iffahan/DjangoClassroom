@@ -10,6 +10,7 @@ router.register(r'assignments', AssignmentViewSet, basename='assignment')
 router.register(r'assignment_status', AssignmentStatusViewSet, basename='assignment_status')
 router.register(r'message', MessageViewSet, basename='message')
 router.register(r'score', ScoreViewSet, basename='score')
+router.register(r'AssignmentResult', AssignmentResultViewSet, basename='assignmentResult')
 
 urlpatterns = [
     path(r'', include(router.urls)),
@@ -36,5 +37,6 @@ urlpatterns = [
     path('changeAssignment/<int:pk>', views.changeAssignment),
     path('deleteAssignment/<int:pk>', views.deleteAssignment),
     path('ClassMembers/<int:pk>', views.ClassMembers),
+    path('AssignResult/<int:pk>', views.AssignResult),
 
 ]

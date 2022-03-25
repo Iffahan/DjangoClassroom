@@ -354,12 +354,22 @@ def ClassMembers(request,pk):
 @api_view(['GET'])
 def AssignResult(request,pk):
     dic1 = {}
+    dic2 = {}
     n=0
-    classroom1 = Classroom.objects.get(id=pk)
-    Members = classroom1.Member.all()
-    for item in Members:
+
+    assignments = Assignment.objects.get(id=pk)
+    asResult = AssignmentResult.objects.get(assignment=assignments)
+    trueStudent = asResult.TrueStudent.all()
+    for item in trueStudent:
         dic1[n] = {'id': item.id, 'user':item.username, 'firstname':item.first_name, 'lastname':item.last_name}
         n= n+1
 
+    m=0
+    falseStudent = asResult.FalseStudent.all()
+    for item in falseStudent:
+        dic2[m] = {'id': item.id, 'user':item.username, 'firstname':item.first_name, 'lastname':item.last_name}
+        m=m+1
+    
 
-    return Response(dic1)
+
+    return Response({"TrueStudent":dic1, "FalseStudent":dic2})

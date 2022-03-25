@@ -17,7 +17,6 @@ class UserSerializer(serializers.ModelSerializer):
 class ClassroomSerializer(serializers.ModelSerializer):
     teacher_firstname = serializers.CharField(source = 'teacher.first_name' , required = False, read_only = True)
     teacher_lastname = serializers.CharField(source = 'teacher.last_name', required = False, read_only = True)
-    # Member = serializers.CharField(source = 'Member.username', required = False, read_only = True)
     teacher_id = serializers.IntegerField(source = 'teacher.id', required = False, read_only = True)
     Member = serializers.SlugRelatedField(queryset=User.objects.all(), many=True, slug_field='username')
 
@@ -27,7 +26,10 @@ class ClassroomSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AssignmentResultSerializer(serializers.ModelSerializer):
-    Member = serializers.SlugRelatedField(queryset=User.objects.all(), many=True, slug_field='username')
+    assignment_title = serializers.CharField(source = 'assignment.title' , required = False, read_only = True)
+    TrueStudent = serializers.SlugRelatedField(queryset=User.objects.all(), many=True, slug_field='username')
+    FalseStudent = serializers.SlugRelatedField(queryset=User.objects.all(), many=True, slug_field='username')
+    
     
     class Meta:
         model = AssignmentResult
