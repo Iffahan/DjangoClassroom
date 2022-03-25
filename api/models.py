@@ -20,6 +20,7 @@ class Classroom(models.Model):
     classCode = models.CharField(max_length=6)
     teacher = models.ForeignKey(User,on_delete=models.CASCADE,related_name='teacher')
     Member = models.ManyToManyField(User,related_name='member')
+    
     def __str__(self):
         return self.classroomName
 
@@ -53,7 +54,6 @@ class Message(models.Model):
 
     def __str__(self):
         return self.user.username
-
 
 
 

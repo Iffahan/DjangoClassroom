@@ -319,3 +319,16 @@ def MyScore(request):
     dic["score"] = score.score
 
     return Response(dic)
+
+@api_view(['GET'])
+def ClassMembers(request,pk):
+    dic1 = {}
+    n=0
+    classroom1 = Classroom.objects.get(id=pk)
+    Members = classroom1.Member.all()
+    for item in Members:
+        dic1[n] = {'id': item.id, 'user':item.username, 'firstname':item.first_name, 'lastname':item.last_name}
+        n= n+1
+
+
+    return Response(dic1)

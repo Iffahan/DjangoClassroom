@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import timedelta
+import json
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     'regist.apps.RegistConfig',
 
     'api',
+    'django_fullname_localization',
     
     'rest_framework',
     'corsheaders',
@@ -145,3 +147,6 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
     'ROTATE_REFRESH_TOKENS': True,
 }
+
+USE_FULL_NAME_INSTEAD_OF_SHORT_NAME = True
+FULL_NAME_TEMPLATE = "{user.last_name} {user.first_name}"

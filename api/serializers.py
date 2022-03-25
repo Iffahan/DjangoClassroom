@@ -17,12 +17,15 @@ class UserSerializer(serializers.ModelSerializer):
 class ClassroomSerializer(serializers.ModelSerializer):
     teacher_firstname = serializers.CharField(source = 'teacher.first_name' , required = False, read_only = True)
     teacher_lastname = serializers.CharField(source = 'teacher.last_name', required = False, read_only = True)
+    # Member = serializers.CharField(source = 'Member.username', required = False, read_only = True)
     teacher_id = serializers.IntegerField(source = 'teacher.id', required = False, read_only = True)
-    Member = serializers.SlugRelatedField(queryset=User.objects.all(), many=True, slug_field='first_name') 
+    Member = serializers.SlugRelatedField(queryset=User.objects.all(), many=True, slug_field='username')
+
     
     class Meta:
         model = Classroom
         fields = '__all__'
+
 
 class ScoreSerializer(serializers.ModelSerializer):
     student_firstname = serializers.CharField(source = 'student.first_name' , required = False, read_only = True)
