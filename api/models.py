@@ -22,7 +22,7 @@ class Classroom(models.Model):
 class Assignment(models.Model):
     title = models.CharField(max_length=255)
     posted_date = models.DateTimeField(default=datetime.now, blank=True)
-    deadline = models.DateTimeField(default=datetime.now, blank=True)
+    deadline = models.DateTimeField(default=datetime.now, blank=True,)
     description = models.TextField()
     choice_true = models.TextField(max_length=255,default="choice1",null = False)
     choice_false = models.TextField(max_length=255,default="choice2",null = False)
