@@ -99,15 +99,17 @@ def user_result_do(request,pk):
     assignmentStatus.save()
     
     studentScore = Score.objects.get(student = Student)
-    studentScore.score = studentScore.score + 1
-    studentScore.save()
+
 
     AsResult = AssignmentResult.objects.get(assignment = Assignments)
     if Result == True:
         AsResult.TrueStudent.add(Student)
+        studentScore.score = studentScore.score + 1
+
     else:
         AsResult.FalseStudent.add(Student)
     AsResult.save()
+    studentScore.save()
 
     return Response({"success!"})
 
