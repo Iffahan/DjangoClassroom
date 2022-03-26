@@ -45,7 +45,6 @@ class ScoreSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AssignmentSerializer(serializers.ModelSerializer):
-    teacher = serializers.CharField(source = 'teacher.username', required = False, read_only = True)
     assignment_id = serializers.IntegerField(source = 'assignment.id', required = False, read_only = True)
     classroom = serializers.CharField(source = 'classroom.title', required = False, read_only = True)
     classroom_id = serializers.IntegerField(source = 'classroom.id', required = False, read_only = True)

@@ -77,6 +77,7 @@ class AssignmentStatusViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return AssignmentStatus.objects.all()
 
+
 class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = MessageSerializer
 
