@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-(u&8s@zy$aww^%82@q!3o&gh^t!ttl#2)a@y_-*h)ip)7m5#&_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -117,8 +117,9 @@ USE_TZ = True
 import os
 STATIC_URL = 'dj-static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATIC_URL = 'media/'
-STATIC_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 # Default primary key field type
@@ -139,13 +140,9 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://wd0303.coe.psu.ac.th",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "http://localhost:3000"
 ]
 
 SIMPLE_JWT = {
