@@ -8,12 +8,7 @@ from django.contrib.auth.models import User,Group
 from django.utils.crypto import get_random_string
 
 
-class Score(models.Model):
-    student = models.ForeignKey(User,on_delete=models.CASCADE,related_name='student')
-    score =  models.IntegerField(null = True,default=0)
 
-    def __str__(self):
-        return self.student.username
 
 class Classroom(models.Model):
     classroomName = models.CharField(max_length=30, default='Classroom Name')
@@ -63,5 +58,10 @@ class AssignmentResult(models.Model):
     def __str__(self):
         return self.assignment.title
 
+class Score(models.Model):
+    student = models.ForeignKey(User,on_delete=models.CASCADE,related_name='student')
+    score =  models.IntegerField(null = True,default=0)
 
+    def __str__(self):
+        return self.student.username
 

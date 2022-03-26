@@ -336,8 +336,8 @@ def getMessage(request,pk):
 @api_view(['GET'])
 def MyScore(request):
     dic = {}
-    score = Score.objects.get(student=request.user)
-    dic["score"] = score.score
+    score1 = Score.objects.get(student=request.user)
+    dic["score"] = score1.score
 
     return Response(dic)
 
