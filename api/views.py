@@ -243,7 +243,7 @@ def changeAssignment(request,pk):
     assignment = Assignment.objects.get(id=pk)
     assignment.title = Title
     assignment.description = Description
-    assignmentdeadline=Deadline
+    assignment.deadline=Deadline
     assignment.choice_true=Choice_True
     assignment.choice_false=Choice_False
     assignment.save()
