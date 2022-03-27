@@ -12,7 +12,7 @@ from django.utils.crypto import get_random_string
 
 class Classroom(models.Model):
     classroomName = models.CharField(max_length=30, default='Classroom Name')
-    classCode = models.CharField(max_length=6,default='000000')
+    classCode = models.CharField(max_length=6,default='clCode')
     teacher = models.ForeignKey(User,on_delete=models.CASCADE,related_name='teacher')
     Member = models.ManyToManyField(User,related_name='member')
     
@@ -52,8 +52,8 @@ class Message(models.Model):
 
 class AssignmentResult(models.Model):
     assignment = models.ForeignKey(Assignment,on_delete=models.CASCADE,related_name='assignment')
-    TrueStudent = models.ManyToManyField(User,related_name='TrueStudent', null = True)
-    FalseStudent = models.ManyToManyField(User,related_name='FalseStudent', null = True)
+    TrueStudent = models.ManyToManyField(User,related_name='TrueStudent')
+    FalseStudent = models.ManyToManyField(User,related_name='FalseStudent')
     
     def __str__(self):
         return self.assignment.title
