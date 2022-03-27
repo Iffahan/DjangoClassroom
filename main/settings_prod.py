@@ -14,7 +14,7 @@ DATABASES = {
 }
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['wd0303.coe.psu.ac.th']
 CSRF_TRUSTED_ORIGINS = ["https://wd0303.coe.psu.ac.th"]
 
 
