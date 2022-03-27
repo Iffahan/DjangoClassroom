@@ -1,6 +1,6 @@
 from .settings import *
 
-# run manage.py with --setting=main.settings_prod
+# run manage.py with --settings=main.settings_prod
 
 DATABASES = {
     'default': {
