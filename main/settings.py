@@ -28,16 +28,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'regist.apps.RegistConfig',
-
-    'api.apps.ApiConfig',
-    'regist.apps.RegistConfig',
-    'authentication.apps.AuthConfig',
-    
-    'django_fullname_localization',
-    
     'rest_framework',
     'corsheaders',
+
+    'regist.apps.RegistConfig',
+    'api.apps.ApiConfig',
+
+    'django_fullname_localization',
+
 ]
 
 MIDDLEWARE = [
