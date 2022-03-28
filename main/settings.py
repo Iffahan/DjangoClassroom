@@ -30,7 +30,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'regist.apps.RegistConfig',
 
-    'api',
+    'api.apps.ApiConfig',
+    'regist.apps.RegistConfig',
+    'authentication.apps.AuthConfig',
+    
     'django_fullname_localization',
     
     'rest_framework',
