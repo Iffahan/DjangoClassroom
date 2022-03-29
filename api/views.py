@@ -38,7 +38,7 @@ class ClassroomViewSet(viewsets.ModelViewSet):
         return super().create(request, *args, **kwargs)
 
     def get_queryset(self):
-        return Classroom.objects.all()
+        return Classroom1.objects.all()
 
 class AssignmentResultViewSet(viewsets.ModelViewSet):
     serializer_class = AssignmentResultSerializer
@@ -126,7 +126,7 @@ def addUser(request,pk):
     data = request.data
     Email = data['email']
     newuser = User.objects.get(email=Email)
-    classroom = Classroom.objects.get(id=pk)
+    classroom = Classroom1.objects.get(id=pk)
     classroom.Member.add(newuser)
 
     return Response({"success"})
@@ -136,7 +136,7 @@ def removeUser(request,pk):
     data = request.data
     Email = data['email']
     newuser = User.objects.get(email=Email)
-    classroom = Classroom.objects.get(id=pk)
+    classroom = Classroom1.objects.get(id=pk)
     classroom.Member.remove(newuser)
 
     return Response({"success"})
@@ -144,7 +144,7 @@ def removeUser(request,pk):
 @api_view(['POST'])
 def leave(request,pk):
     current_user = User.objects.get(username = request.user)
-    classroom = Classroom.objects.get(id=pk)
+    classroom = Classroom1.objects.get(id=pk)
     classroom.Member.remove(current_user)
 
     return Response({"success"})
@@ -157,7 +157,7 @@ def createClass(request):
     Teacher = data['teacher']
     ClassCode = data['classCode']
     teacher_user = User.objects.get(username=Teacher)
-    classroom = Classroom.objects.create(classroomName=ClassName, teacher = teacher_user, classCode = ClassCode)
+    classroom = Classroom1.objects.create(classroomName=ClassName, teacher = teacher_user, classCode = ClassCode)
     classroom.save()
 
     return Response({"create classroom success!"})
@@ -169,7 +169,7 @@ def changeClass(request,pk):
     Teacher = data['teacher']
     ClassCode = data['classCode']
     teacher_user = User.objects.get(username=Teacher)
-    classroom = Classroom.objects.get(id=pk)
+    classroom = Classroom1.objects.get(id=pk)
     classroom.classroomName=ClassName
     classroom.teacher = teacher_user 
     classroom.classCode = ClassCode
@@ -182,7 +182,7 @@ def join(request):
     data = request.data
     ClassCode = data['classCode']
     newuser = User.objects.get(username=request.user)
-    classroom = Classroom.objects.get(classCode = ClassCode)
+    classroom = Classroom1.objects.get(classCode = ClassCode)
     classroom.Member.add(newuser)
 
     return Response("success! you join the class")
@@ -190,7 +190,7 @@ def join(request):
 @api_view(['GET'])
 def myclass(request):
     current_user = User.objects.get(username=request.user)
-    classroom = Classroom.objects.filter(Member = current_user)
+    classroom = Classroom1.objects.filter(Member = current_user)
 
     return Response(classroom)
 
@@ -224,7 +224,7 @@ def createAssignment(request,pk):
     Deadline = data['deadline']
     Choice_True = data['choice_true']
     Choice_False = data['choice_false']
-    classroomA = Classroom.objects.get(id=pk)
+    classroomA = Classroom1.objects.get(id=pk)
     assignments = Assignment.objects.create(classroom=classroomA, title = Title, description = Description, deadline=Deadline,choice_true=Choice_True,choice_false=Choice_False)
     assignments.save()
     assignmentResult = AssignmentResult.objects.create(assignment = assignments)
@@ -254,7 +254,7 @@ def changeAssignment(request,pk):
 def getUserClassroom(request):
     nested_dict = {}
     n=0
-    for item in Classroom.objects.filter(Member = request.user):
+    for item in Classroom1.objects.filter(Member = request.user):
         nested_dict[n] = {"id" : item.id ,"name": item.classroomName}
         n = n + 1
 
@@ -278,7 +278,7 @@ def postMessage(request,pk):
     data = request.data
     text_input = data['text']
     current_user = User.objects.get(username=request.user)
-    classroom1 = Classroom.objects.get(id=pk)
+    classroom1 = Classroom1.objects.get(id=pk)
     message = Message.objects.create(classroom=classroom1, user=current_user, text = text_input)
     message.save()
 
@@ -307,7 +307,7 @@ def deleteMessage(request,pk):
 @api_view(['POST'])
 def deleteClassroom(request,pk):
 
-    classroom = Classroom.objects.get(id=pk)
+    classroom = Classroom1.objects.get(id=pk)
     classroom.delete()
 
     return Response({"delete":classroom.classroomName})
@@ -323,7 +323,7 @@ def deleteAssignment(request,pk):
 
 @api_view(['GET'])
 def getMessage(request,pk):
-    classroom1 = Classroom.objects.get(id=pk)
+    classroom1 = Classroom1.objects.get(id=pk)
     dic1 = {}
     n=0
     
@@ -345,7 +345,7 @@ def MyScore(request):
 def ClassMembers(request,pk):
     dic1 = {}
     n=0
-    classroom1 = Classroom.objects.get(id=pk)
+    classroom1 = Classroom1.objects.get(id=pk)
     Members = classroom1.Member.all()
     for item in Members:
         dic1[n] = {'id': item.id, 'user':item.username, 'firstname':item.first_name, 'lastname':item.last_name}

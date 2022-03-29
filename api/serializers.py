@@ -22,7 +22,7 @@ class ClassroomSerializer(serializers.ModelSerializer):
 
     
     class Meta:
-        model = Classroom
+        model = Classroom1
         fields = '__all__'
 
 class AssignmentResultSerializer(serializers.ModelSerializer):

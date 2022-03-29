@@ -10,7 +10,7 @@ from django.utils.crypto import get_random_string
 
 
 
-class Classroom(models.Model):
+class Classroom1(models.Model):
     classroomName = models.CharField(max_length=30, default='Classroom Name')
     classCode = models.CharField(max_length=6,default='CODE')
     teacher = models.ForeignKey(User,on_delete=models.CASCADE,related_name='teacher')
@@ -26,7 +26,7 @@ class Assignment(models.Model):
     description = models.TextField()
     choice_true = models.TextField(max_length=255,default="choice1",null = False)
     choice_false = models.TextField(max_length=255,default="choice2",null = False)
-    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, null = True)
+    classroom = models.ForeignKey(Classroom1, on_delete=models.CASCADE, null = True)
 
     def __str__(self):
         return self.title
@@ -44,7 +44,7 @@ class AssignmentStatus(models.Model):
 
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
-    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, null = True)
+    classroom = models.ForeignKey(Classroom1, on_delete=models.CASCADE, null = True)
     text = models.CharField(max_length=500)
 
     def __str__(self):
