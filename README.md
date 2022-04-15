@@ -1,4 +1,4 @@
-# BACKEND of 03-03
+# BACKEND of Classroom System with Django & Rest Framework
 
 
 ## Installation
